@@ -60,17 +60,44 @@ async function scrapeGoogleMaps(url) {
       const reviewEl = card.querySelector('[aria-label*="reviews"]');
       const reviewText = reviewEl?.textContent?.replace(/[()]/g, '').trim() ?? null;
 
-      // Address / info lines
+      // Raw info lines
       const infoEls = card.querySelectorAll('[class*="W4Efsd"] > span > span');
       const infoLines = [...infoEls]
         .map((el) => el.textContent.trim())
         .filter((t) => t && t !== '·');
 
+      // Parse info lines into named fields
+      const PLUS_CODE = /^[A-Z0-9]{4,}\+[A-Z0-9]{2,}/;
+      const HOURS     = /^(open|closed)/i;
+
+      let category = null;
+      let address  = null;
+      let plusCode = null;
+      let hours    = null;
+
+      for (const line of infoLines) {
+        if (!category && !PLUS_CODE.test(line) && !HOURS.test(line)) {
+          category = line;
+        } else if (PLUS_CODE.test(line)) {
+          plusCode = line;
+        } else if (HOURS.test(line)) {
+          hours = line;
+        } else if (!address && line) {
+          address = line;
+        }
+      }
+
       // Google Maps link for this card
       const linkEl = card.querySelector('a[href*="/maps/place/"]');
       const placeUrl = linkEl?.href ?? null;
 
-      results.push({ name, rating, reviews: reviewText, info: infoLines, url: placeUrl });
+      results.push({
+        name,
+        rating,
+        reviews: reviewText,
+        location: { category, address, plusCode, hours },
+        url: placeUrl,
+      });
     }
 
     return results;
@@ -91,9 +118,12 @@ async function main() {
   console.log(`\nFound ${venues.length} venue(s):\n`);
   venues.forEach((v, i) => {
     console.log(`${i + 1}. ${v.name}`);
-    if (v.rating)  console.log(`   Rating : ${v.rating} (${v.reviews})`);
-    if (v.info.length) console.log(`   Info   : ${v.info.join(' · ')}`);
-    if (v.url)     console.log(`   Link   : ${v.url}`);
+    if (v.rating)              console.log(`   Rating   : ${v.rating} (${v.reviews})`);
+    if (v.location.category)  console.log(`   Category : ${v.location.category}`);
+    if (v.location.address)   console.log(`   Address  : ${v.location.address}`);
+    if (v.location.plusCode)  console.log(`   Plus code: ${v.location.plusCode}`);
+    if (v.location.hours)     console.log(`   Hours    : ${v.location.hours}`);
+    if (v.url)                console.log(`   Link     : ${v.url}`);
     console.log();
   });
 
