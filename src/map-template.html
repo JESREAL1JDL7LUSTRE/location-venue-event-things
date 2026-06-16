@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VenueMap CDO — Event Venues</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --bg:       #020617;
+      --surface:  #0F172A;
+      --s2:       #1E293B;
+      --border:   #334155;
+      --text:     #F8FAFC;
+      --muted:    #94A3B8;
+      --dim:      #64748B;
+      --green:    #22C55E;
+      --gbg:      rgba(34,197,94,.12);
+      --red:      #EF4444;
+      --rbg:      rgba(239,68,68,.10);
+      --yellow:   #EAB308;
+      --r:        8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Fira Sans', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    /* ── Topbar ── */
+    #topbar {
+      height: 54px; background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px; flex-shrink: 0; z-index: 900;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-icon {
+      width: 30px; height: 30px; background: var(--green);
+      border-radius: 7px; display: grid; place-items: center; flex-shrink: 0;
+    }
+    .brand-name { font-family: 'Fira Code', monospace; font-size: 14px; font-weight: 600; }
+    .brand-sub  { font-size: 11px; color: var(--dim); }
+    .topbar-stats { display: flex; gap: 18px; }
+    .tstat { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .tstat-val { font-family: 'Fira Code', monospace; font-size: 13px; font-weight: 600; color: var(--text); }
+    .pulse {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+      70%  { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    /* ── Layout ── */
+    #main { display: flex; flex: 1; overflow: hidden; }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 360px; flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .search-wrap { padding: 12px 12px 10px; border-bottom: 1px solid var(--border); }
+    .search-inner { position: relative; }
+    .search-inner svg {
+      position: absolute; left: 9px; top: 50%;
+      transform: translateY(-50%); color: var(--dim); pointer-events: none;
+    }
+    #search {
+      width: 100%; background: var(--s2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 8px 10px 8px 32px;
+      font-family: 'Fira Sans', sans-serif; font-size: 13px; color: var(--text);
+      outline: none; transition: border-color 150ms;
+    }
+    #search::placeholder { color: var(--dim); }
+    #search:focus { border-color: var(--green); }
+
+    /* Filter chips */
+    #filter-chips {
+      padding: 8px 12px; display: flex; gap: 5px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .chip {
+      padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500;
+      border: 1px solid var(--border); color: var(--muted); background: transparent;
+      cursor: pointer; transition: all 150ms; white-space: nowrap;
+    }
+    .chip:hover { border-color: var(--green); color: var(--green); }
+    .chip.active { background: var(--green); border-color: var(--green); color: #000; font-weight: 700; }
+
+    /* Result bar */
+    #result-bar {
+      padding: 6px 12px; font-size: 11px; color: var(--dim);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .open-toggle {
+      display: flex; align-items: center; gap: 4px;
+      cursor: pointer; font-size: 11px; color: var(--muted);
+      user-select: none; transition: color 150ms;
+    }
+    .open-toggle:hover, .open-toggle.active { color: var(--green); }
+    .tog-box {
+      width: 13px; height: 13px; border: 1.5px solid currentColor;
+      border-radius: 3px; display: grid; place-items: center; flex-shrink: 0;
+    }
+    .tog-check { display: none; }
+    .open-toggle.active .tog-check { display: block; }
+
+    /* Venue list */
+    #venue-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--s2) transparent; }
+    #venue-list::-webkit-scrollbar { width: 4px; }
+    #venue-list::-webkit-scrollbar-thumb { background: var(--s2); border-radius: 2px; }
+
+    .vcard {
+      padding: 11px 12px; border-bottom: 1px solid rgba(51,65,85,.4);
+      cursor: pointer; transition: background 150ms;
+    }
+    .vcard:hover { background: var(--s2); }
+    .vcard.active { background: rgba(34,197,94,.07); border-left: 2px solid var(--green); }
+    .vcard-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+    .vcard-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .vcard-stars {
+      display: flex; align-items: center; gap: 2px;
+      font-family: 'Fira Code', monospace; font-size: 12px; font-weight: 600;
+      color: var(--yellow); flex-shrink: 0;
+    }
+    .vcard-cat  { font-size: 11px; color: var(--dim); margin-top: 2px; }
+    .vcard-addr { font-size: 11px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .vcard-foot { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
+    .badge { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+    .badge-open   { background: var(--gbg); color: var(--green); }
+    .badge-closed { background: var(--rbg); color: var(--red); }
+    .vcard-rc { font-size: 10px; color: var(--dim); }
+
+    /* No results */
+    #no-results { display: none; padding: 48px 20px; text-align: center; color: var(--muted); }
+    #no-results svg { opacity: .25; margin-bottom: 14px; }
+    #no-results h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    #no-results p  { font-size: 12px; color: var(--dim); }
+
+    /* ── Map ── */
+    #map { flex: 1; }
+
+    /* ── Popup overrides ── */
+    .leaflet-popup-content-wrapper {
+      background: var(--surface) !important; color: var(--text) !important;
+      border: 1px solid var(--border) !important; border-radius: 12px !important;
+      box-shadow: 0 24px 48px rgba(0,0,0,.6) !important; padding: 0 !important;
+    }
+    .leaflet-popup-tip { background: var(--surface) !important; }
+    .leaflet-popup-content { margin: 0 !important; width: 300px !important; max-height: 72vh; overflow-y: auto; }
+    .leaflet-popup-content::-webkit-scrollbar { width: 4px; }
+    .leaflet-popup-content::-webkit-scrollbar-thumb { background: var(--s2); }
+    .leaflet-popup-close-button { color: var(--muted) !important; font-size: 16px !important; top: 10px !important; right: 10px !important; }
+    .pop { padding: 14px 14px 6px; font-family: 'Fira Sans', sans-serif; font-size: 13px; }
+    .pop-name { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 7px; }
+    .pop-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-bottom: 10px; }
+    .pop-rating { display: flex; align-items: center; gap: 3px; font-family: 'Fira Code', monospace; font-size: 12px; font-weight: 600; color: var(--yellow); }
+    .pop-catbadge { font-size: 10px; background: var(--s2); color: var(--muted); padding: 2px 7px; border-radius: 4px; }
+    .pop-hr { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+    .pop-row { display: flex; gap: 7px; margin-bottom: 6px; align-items: flex-start; font-size: 12px; color: var(--muted); }
+    .pop-row svg { flex-shrink: 0; color: var(--dim); margin-top: 1px; }
+    .pop-row .v { color: var(--text); }
+    .pop-row a { color: var(--green); text-decoration: none; }
+    .pop-row a:hover { text-decoration: underline; }
+    .pop-stitle { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); margin: 10px 0 5px; display: flex; align-items: center; gap: 4px; }
+    .pop-hours-grid { display: grid; grid-template-columns: 80px 1fr; gap: 2px 6px; }
+    .pop-hours-grid .d { font-size: 11px; color: var(--dim); }
+    .pop-hours-grid .t { font-size: 11px; font-family: 'Fira Code', monospace; color: var(--muted); }
+    .pop-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .pop-tag { font-size: 10px; background: var(--s2); color: var(--muted); border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; }
+    .pop-review { background: var(--s2); border-radius: 6px; padding: 8px 10px; margin-bottom: 5px; }
+    .pop-review-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .pop-review-author { font-size: 12px; font-weight: 600; color: var(--text); }
+    .pop-review-stars  { font-size: 10px; color: var(--yellow); }
+    .pop-review-text   { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .pop-links { display: flex; gap: 7px; padding: 10px 14px 12px; }
+    .pop-link {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 7px; border-radius: 7px; font-size: 11px; font-weight: 600;
+      text-decoration: none; cursor: pointer; transition: all 150ms;
+    }
+    .pop-link-p { background: var(--green); color: #000; }
+    .pop-link-p:hover { background: #16a34a; }
+    .pop-link-s { background: var(--s2); color: var(--text); border: 1px solid var(--border); }
+    .pop-link-s:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── Mobile ── */
+    @media (max-width: 700px) {
+      #main { flex-direction: column; }
+      #sidebar { width: 100%; height: 240px; border-right: none; border-top: 1px solid var(--border); order: 2; }
+      #map { order: 1; min-height: 300px; }
+      .topbar-stats, #filter-chips { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg width="16" height="16" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">VenueMap CDO</div>
+      <div class="brand-sub">Cagayan de Oro · Event Venues</div>
+    </div>
+  </div>
+  <div class="topbar-stats" id="topbar-stats"></div>
+</div>
+
+<div id="main">
+  <div id="sidebar">
+    <div class="search-wrap">
+      <div class="search-inner">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input id="search" type="text" placeholder="Search venues, categories, addresses…" autocomplete="off" />
+      </div>
+    </div>
+    <div id="filter-chips"></div>
+    <div id="result-bar">
+      <span id="result-count"></span>
+      <div class="open-toggle" id="open-toggle">
+        <div class="tog-box">
+          <svg class="tog-check" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        Open now
+      </div>
+    </div>
+    <div id="venue-list"></div>
+    <div id="no-results">
+      <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <h3>No venues found</h3>
+      <p>Try a different search term or clear the filters.</p>
+    </div>
+  </div>
+  <div id="map"></div>
+</div>
+
+<script>
+const RAW = VENUES_DATA_PLACEHOLDER;
+
+/* ── helpers ── */
+const cleanHours = (s) => (s ?? '').replace(/,?\s*Copy open hours/gi, '').trim();
+const getCoords  = (v)  => v.coords ? [v.coords.lat, v.coords.lng] : (() => {
+  const m = (v.url ?? '').match(/!3d(-?[\d.]+)!4d(-?[\d.]+)/);
+  return m ? [+m[1], +m[2]] : null;
+})();
+const isOpen     = (v)  => /^open/i.test(v.location?.hours ?? '');
+
+const star = (filled, sz = 11) =>
+  `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5">
+    <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+  </svg>`;
+
+const stars = (n, sz) => {
+  const full = Math.round(n ?? 0);
+  return Array.from({ length: 5 }, (_, i) => star(i < full, sz)).join('');
+};
+
+/* ── inline SVG icons (Heroicons outline 24px) ── */
+const I = {
+  pin  : `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>`,
+  phone: `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z"/></svg>`,
+  globe: `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>`,
+  clock: `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+  tag  : `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path d="M6 6h.008v.008H6V6z"/></svg>`,
+  mapb : `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg>`,
+  ext  : `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>`,
+  bld  : `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>`,
+  code : `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>`,
+};
+
+/* ── enrich ── */
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const venues = RAW.map((v) => ({ ...v, _coords: getCoords(v) })).filter((v) => v._coords);
+
+/* ── category chips ── */
+const catCount = {};
+venues.forEach((v) => { const c = v.location?.category ?? 'Other'; catCount[c] = (catCount[c] ?? 0) + 1; });
+const topCats = Object.entries(catCount).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([c]) => c);
+let activeCategory = 'All';
+
+const chipsEl = document.getElementById('filter-chips');
+['All', ...topCats].forEach((cat) => {
+  const el = document.createElement('button');
+  el.className = 'chip' + (cat === 'All' ? ' active' : '');
+  el.textContent = cat === 'All' ? `All (${venues.length})` : cat;
+  el.dataset.cat = cat;
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+    el.classList.add('active');
+    activeCategory = cat;
+    activeIdx = null;
+    renderList();
+  });
+  chipsEl.appendChild(el);
+});
+
+/* ── topbar stats ── */
+const openCount = venues.filter(isOpen).length;
+document.getElementById('topbar-stats').innerHTML =
+  `<div class="tstat"><span class="tstat-val">${venues.length}</span>&nbsp;venues</div>
+   <div class="tstat"><div class="pulse"></div>&nbsp;<span class="tstat-val">${openCount}</span>&nbsp;open now</div>`;
+
+/* ── popup builder ── */
+const buildPopup = (v) => {
+  const d   = v.details ?? {};
+  const hrs = v.location?.hours ?? '';
+  const ho  = /^open/i.test(hrs);
+  const hc  = /^closed/i.test(hrs);
+  const addr = d.fullAddress ?? v.location?.address ?? '';
+
+  let h = `<div class="pop">`;
+  h += `<div class="pop-name">${v.name}</div>`;
+  h += `<div class="pop-meta">`;
+  if (v.rating) {
+    h += `<span class="pop-rating">${stars(v.rating, 11)}&nbsp;${v.rating}`;
+    if (d.reviewCount) h += ` <span style="color:var(--dim);font-weight:400">(${d.reviewCount.toLocaleString()})</span>`;
+    h += `</span>`;
+  }
+  if (v.location?.category) h += `<span class="pop-catbadge">${v.location.category}</span>`;
+  if (ho) h += `<span class="badge badge-open">Open</span>`;
+  else if (hc) h += `<span class="badge badge-closed">Closed</span>`;
+  if (d.isClaimed === false) h += `<span class="pop-catbadge" style="color:var(--yellow)">Unclaimed</span>`;
+  h += `</div><hr class="pop-hr">`;
+
+  if (addr)        h += `<div class="pop-row">${I.pin}<span class="v">${addr}</span></div>`;
+  if (d.locatedIn) h += `<div class="pop-row">${I.bld}<span class="v">In: ${d.locatedIn}</span></div>`;
+  if (d.plusCode)  h += `<div class="pop-row">${I.code}<span class="v">${d.plusCode}</span></div>`;
+  if (d.phone)     h += `<div class="pop-row">${I.phone}<span class="v">${d.phone}</span></div>`;
+  if (d.website)   h += `<div class="pop-row">${I.globe}<a href="${d.website}" target="_blank" rel="noopener">${d.website.replace(/^https?:\/\//,'').split('/')[0]}</a></div>`;
+  if (v.coords)    h += `<div class="pop-row">${I.pin}<span class="v" style="color:var(--dim);font-family:'Fira Code',monospace;font-size:10px">${v.coords.lat.toFixed(5)}, ${v.coords.lng.toFixed(5)}</span></div>`;
+
+  const wh = d.weeklyHours ?? {};
+  const whDays = DAYS.filter((day) => wh[day]);
+  if (whDays.length) {
+    h += `<div class="pop-stitle">${I.clock} Weekly hours</div><div class="pop-hours-grid">`;
+    whDays.forEach((day) => { h += `<span class="d">${day}</span><span class="t">${cleanHours(wh[day])}</span>`; });
+    h += `</div>`;
+  }
+
+  if (d.reviewKeywords?.length) {
+    h += `<div class="pop-stitle">${I.tag} Topics</div><div class="pop-tags">`;
+    d.reviewKeywords.slice(0, 8).forEach((k) => { h += `<span class="pop-tag">${k}</span>`; });
+    h += `</div>`;
+  }
+
+  if (d.featureLabels?.length) {
+    h += `<div class="pop-stitle">${I.tag} Features</div><div class="pop-tags">`;
+    d.featureLabels.slice(0, 8).forEach((f) => { h += `<span class="pop-tag">${f}</span>`; });
+    h += `</div>`;
+  }
+
+  if (d.description) {
+    const desc = d.description.slice(0, 200);
+    h += `<hr class="pop-hr"><p style="font-size:11px;color:var(--muted);line-height:1.6">${desc}${d.description.length > 200 ? '…' : ''}</p>`;
+  }
+
+  const revs = (d.reviews ?? []).filter((r) => r.text).slice(0, 2);
+  if (revs.length) {
+    h += `<div class="pop-stitle">Reviews</div>`;
+    revs.forEach((r) => {
+      const badge = r.isLocalGuide ? ' <span style="color:var(--green);font-size:9px">Local Guide</span>' : '';
+      h += `<div class="pop-review">
+        <div class="pop-review-top">
+          <span class="pop-review-author">${r.author ?? 'Anonymous'}${badge}</span>
+          ${r.rating ? `<span class="pop-review-stars">${'★'.repeat(r.rating)}</span>` : ''}
+        </div>
+        <div class="pop-review-text">${(r.text ?? '').slice(0, 140)}${(r.text ?? '').length > 140 ? '…' : ''}</div>
+      </div>`;
+    });
+  }
+
+  if (d.peopleAlsoSearch?.length) {
+    h += `<hr class="pop-hr"><div class="pop-stitle">People also search</div><div class="pop-tags">`;
+    d.peopleAlsoSearch.slice(0, 4).forEach((s) => { h += `<span class="pop-tag">${s}</span>`; });
+    h += `</div>`;
+  }
+
+  h += `</div>`;
+  h += `<div class="pop-links">`;
+  if (v.url)     h += `<a class="pop-link pop-link-p" href="${v.url}" target="_blank" rel="noopener">${I.mapb} Google Maps</a>`;
+  if (d.website) h += `<a class="pop-link pop-link-s" href="${d.website}" target="_blank" rel="noopener">${I.ext} Website</a>`;
+  h += `</div>`;
+
+  return h;
+};
+
+/* ── map ── */
+const avgLat = venues.reduce((s, v) => s + v._coords[0], 0) / venues.length;
+const avgLng = venues.reduce((s, v) => s + v._coords[1], 0) / venues.length;
+
+const map = L.map('map', { zoomControl: false }).setView([avgLat, avgLng], 13);
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  maxZoom: 19,
+}).addTo(map);
+
+const makePin = (color) => L.divIcon({
+  className: '',
+  iconAnchor : [12, 28],
+  popupAnchor: [0, -30],
+  html: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
+    <path d="M12 0C5.4 0 0 5.4 0 12c0 8.4 12 20 12 20S24 20.4 24 12C24 5.4 18.6 0 12 0z" fill="${color}"/>
+    <circle cx="12" cy="12" r="5" fill="#000" opacity=".3"/>
+    <circle cx="12" cy="12" r="3.5" fill="#fff"/>
+  </svg>`,
+});
+
+const PIN_ACTIVE = makePin('#22C55E');
+const PIN_DIM    = makePin('#475569');
+
+/* ── state ── */
+let showOpenOnly = false;
+let activeIdx    = null;
+let currentList  = [];
+let markers      = [];
+
+/* ── render ── */
+const renderList = () => {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+
+  currentList = venues.filter((v) => {
+    if (activeCategory !== 'All' && v.location?.category !== activeCategory) return false;
+    if (showOpenOnly && !isOpen(v)) return false;
+    if (q) {
+      const hay = [v.name, v.location?.category, v.details?.fullAddress, v.location?.address].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const listEl = document.getElementById('venue-list');
+  const noRes  = document.getElementById('no-results');
+  document.getElementById('result-count').textContent = `${currentList.length} venue${currentList.length !== 1 ? 's' : ''}`;
+
+  if (!currentList.length) {
+    listEl.innerHTML = '';
+    noRes.style.display = 'block';
+  } else {
+    noRes.style.display = 'none';
+    listEl.innerHTML = currentList.map((v) => {
+      const d    = v.details ?? {};
+      const vidx = venues.indexOf(v);
+      const hrs  = v.location?.hours ?? '';
+      const addr = d.fullAddress ?? v.location?.address ?? '';
+      return `<div class="vcard${vidx === activeIdx ? ' active' : ''}" data-vidx="${vidx}">
+        <div class="vcard-top">
+          <div class="vcard-name">${v.name}</div>
+          ${v.rating ? `<div class="vcard-stars">${stars(v.rating, 10)}&nbsp;${v.rating}</div>` : ''}
+        </div>
+        <div class="vcard-cat">${v.location?.category ?? ''}</div>
+        ${addr ? `<div class="vcard-addr">${addr}</div>` : ''}
+        <div class="vcard-foot">
+          ${/^open/i.test(hrs) ? '<span class="badge badge-open">Open</span>' : /^closed/i.test(hrs) ? '<span class="badge badge-closed">Closed</span>' : ''}
+          ${d.reviewCount ? `<span class="vcard-rc">${d.reviewCount.toLocaleString()} reviews</span>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+    listEl.querySelectorAll('.vcard').forEach((el) =>
+      el.addEventListener('click', () => selectVenue(parseInt(el.dataset.vidx, 10)))
+    );
+  }
+
+  /* markers */
+  markers.forEach((m) => m.remove());
+  markers = currentList.map((v) => {
+    const vidx = venues.indexOf(v);
+    const m = L.marker(v._coords, { icon: vidx === activeIdx ? PIN_ACTIVE : PIN_DIM })
+      .addTo(map)
+      .bindPopup(buildPopup(v), { maxWidth: 320 });
+    m.on('click', () => selectVenue(vidx));
+    return m;
+  });
+};
+
+const selectVenue = (vidx) => {
+  activeIdx = vidx;
+  const v = venues[vidx];
+  if (!v) return;
+
+  document.querySelectorAll('.vcard').forEach((c) => c.classList.remove('active'));
+  const card = document.querySelector(`.vcard[data-vidx="${vidx}"]`);
+  if (card) { card.classList.add('active'); card.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+
+  markers.forEach((m, i) => m.setIcon(currentList[i] && venues.indexOf(currentList[i]) === vidx ? PIN_ACTIVE : PIN_DIM));
+
+  const ci = currentList.indexOf(v);
+  map.setView(v._coords, Math.max(map.getZoom(), 15), { animate: true });
+  if (ci >= 0 && markers[ci]) markers[ci].openPopup();
+};
+
+/* ── events ── */
+let debounce;
+document.getElementById('search').addEventListener('input', () => {
+  clearTimeout(debounce);
+  debounce = setTimeout(() => { activeIdx = null; renderList(); }, 200);
+});
+
+document.getElementById('open-toggle').addEventListener('click', function () {
+  showOpenOnly = !showOpenOnly;
+  this.classList.toggle('active', showOpenOnly);
+  activeIdx = null;
+  renderList();
+});
+
+renderList();
+</script>
+</body>
+</html>

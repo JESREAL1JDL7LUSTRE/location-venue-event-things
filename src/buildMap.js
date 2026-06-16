@@ -1,13 +1,15 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
-const TEMPLATE = path.join('output', 'map.html');
+const TEMPLATE = path.join('src', 'map-template.html');
 const DATA     = path.join('output', 'venues.json');
 const OUT      = path.join('output', 'map.html');
 
-const venues = JSON.parse(await readFile(DATA, 'utf8'));
-const template = await readFile(TEMPLATE, 'utf8');
+const [template, venues] = await Promise.all([
+  readFile(TEMPLATE, 'utf8'),
+  readFile(DATA, 'utf8').then(JSON.parse),
+]);
 
-const html = template.replace('VENUES_DATA_PLACEHOLDER', JSON.stringify(venues));
-await writeFile(OUT, html);
-console.log(`Map built: ${OUT} (${venues.length} venues)`);
+await mkdir('output', { recursive: true });
+await writeFile(OUT, template.replace('VENUES_DATA_PLACEHOLDER', JSON.stringify(venues)));
+console.log(`Map built → ${OUT}  (${venues.length} venues)`);

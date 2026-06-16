@@ -261,8 +261,11 @@ const RAW = [{"name":"Cove Garden Resort","rating":4.7,"reviews":null,"location"
 
 /* ── helpers ── */
 const cleanHours = (s) => (s ?? '').replace(/,?\s*Copy open hours/gi, '').trim();
-const getCoords  = (url) => { const m = (url ?? '').match(/!3d(-?[\d.]+)!4d(-?[\d.]+)/); return m ? [+m[1], +m[2]] : null; };
-const isOpen     = (v)   => /^open/i.test(v.location?.hours ?? '');
+const getCoords  = (v)  => v.coords ? [v.coords.lat, v.coords.lng] : (() => {
+  const m = (v.url ?? '').match(/!3d(-?[\d.]+)!4d(-?[\d.]+)/);
+  return m ? [+m[1], +m[2]] : null;
+})();
+const isOpen     = (v)  => /^open/i.test(v.location?.hours ?? '');
 
 const star = (filled, sz = 11) =>
   `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5">
@@ -289,7 +292,7 @@ const I = {
 
 /* ── enrich ── */
 const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-const venues = RAW.map((v) => ({ ...v, _coords: getCoords(v.url) })).filter((v) => v._coords);
+const venues = RAW.map((v) => ({ ...v, _coords: getCoords(v) })).filter((v) => v._coords);
 
 /* ── category chips ── */
 const catCount = {};
@@ -338,6 +341,7 @@ const buildPopup = (v) => {
   if (v.location?.category) h += `<span class="pop-catbadge">${v.location.category}</span>`;
   if (ho) h += `<span class="badge badge-open">Open</span>`;
   else if (hc) h += `<span class="badge badge-closed">Closed</span>`;
+  if (d.isClaimed === false) h += `<span class="pop-catbadge" style="color:var(--yellow)">Unclaimed</span>`;
   h += `</div><hr class="pop-hr">`;
 
   if (addr)        h += `<div class="pop-row">${I.pin}<span class="v">${addr}</span></div>`;
@@ -345,12 +349,19 @@ const buildPopup = (v) => {
   if (d.plusCode)  h += `<div class="pop-row">${I.code}<span class="v">${d.plusCode}</span></div>`;
   if (d.phone)     h += `<div class="pop-row">${I.phone}<span class="v">${d.phone}</span></div>`;
   if (d.website)   h += `<div class="pop-row">${I.globe}<a href="${d.website}" target="_blank" rel="noopener">${d.website.replace(/^https?:\/\//,'').split('/')[0]}</a></div>`;
+  if (v.coords)    h += `<div class="pop-row">${I.pin}<span class="v" style="color:var(--dim);font-family:'Fira Code',monospace;font-size:10px">${v.coords.lat.toFixed(5)}, ${v.coords.lng.toFixed(5)}</span></div>`;
 
   const wh = d.weeklyHours ?? {};
   const whDays = DAYS.filter((day) => wh[day]);
   if (whDays.length) {
     h += `<div class="pop-stitle">${I.clock} Weekly hours</div><div class="pop-hours-grid">`;
     whDays.forEach((day) => { h += `<span class="d">${day}</span><span class="t">${cleanHours(wh[day])}</span>`; });
+    h += `</div>`;
+  }
+
+  if (d.reviewKeywords?.length) {
+    h += `<div class="pop-stitle">${I.tag} Topics</div><div class="pop-tags">`;
+    d.reviewKeywords.slice(0, 8).forEach((k) => { h += `<span class="pop-tag">${k}</span>`; });
     h += `</div>`;
   }
 
@@ -369,14 +380,21 @@ const buildPopup = (v) => {
   if (revs.length) {
     h += `<div class="pop-stitle">Reviews</div>`;
     revs.forEach((r) => {
+      const badge = r.isLocalGuide ? ' <span style="color:var(--green);font-size:9px">Local Guide</span>' : '';
       h += `<div class="pop-review">
         <div class="pop-review-top">
-          <span class="pop-review-author">${r.author ?? 'Anonymous'}</span>
+          <span class="pop-review-author">${r.author ?? 'Anonymous'}${badge}</span>
           ${r.rating ? `<span class="pop-review-stars">${'★'.repeat(r.rating)}</span>` : ''}
         </div>
         <div class="pop-review-text">${(r.text ?? '').slice(0, 140)}${(r.text ?? '').length > 140 ? '…' : ''}</div>
       </div>`;
     });
+  }
+
+  if (d.peopleAlsoSearch?.length) {
+    h += `<hr class="pop-hr"><div class="pop-stitle">People also search</div><div class="pop-tags">`;
+    d.peopleAlsoSearch.slice(0, 4).forEach((s) => { h += `<span class="pop-tag">${s}</span>`; });
+    h += `</div>`;
   }
 
   h += `</div>`;

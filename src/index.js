@@ -21,6 +21,10 @@ const printVenue = (venue, index, total) => {
   if (d.price)                   console.log(`   ${chalk.cyan('price')}        : ${d.price}`);
   if (d.reviewCount)             console.log(`   ${chalk.cyan('reviews')}      : ${d.reviewCount}`);
   if (d.featureLabels?.length)   console.log(`   ${chalk.cyan('features')}     : ${d.featureLabels.slice(0, 3).join(' | ')}`);
+  if (d.reviewKeywords?.length)  console.log(`   ${chalk.cyan('topics')}       : ${d.reviewKeywords.slice(0, 4).join(' · ')}`);
+  if (d.isClaimed !== undefined) console.log(`   ${chalk.cyan('claimed')}      : ${d.isClaimed ? chalk.green('yes') : chalk.yellow('no')}`);
+  if (d.ratingDistribution)      console.log(`   ${chalk.cyan('rating dist')} : ${Object.entries(d.ratingDistribution).sort((a,b)=>b[0]-a[0]).map(([s,c])=>`${s}★×${c}`).join(' ')}`);
+  if (d.coLocated?.length)       console.log(`   ${chalk.cyan('co-located')}   : ${d.coLocated.map(p=>p.name).slice(0,2).join(', ')}`);
   if (d.reviews?.length)         console.log(`   ${chalk.cyan('review texts')} : ${d.reviews.length} found`);
   if (d.error)                   console.log(`   ${chalk.red('ERROR')}        : ${d.error}`);
   console.log();
