@@ -71,6 +71,17 @@
     "url": "https://www.google.com/maps/place/Limketkai+Atrium%28The+Atrium%29/data=!4m7!3m6!1s0x32fff2c435dbc291:0xd2bc2533d819912c!8m2!3d8.4815828!4d124.6560603!16s%2Fg%2F1tczbdz1!19sChIJkcLbNcTy_zIRLJEZ2DMlvNI?authuser=0&hl=en&rclk=1"
   },
   {
+    "name": "Rosario Pavilion",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "Limketkai Center, Rosario Cres"
+    ],
+    "url": "https://www.google.com/maps/place/Rosario+Pavilion/data=!4m7!3m6!1s0x32fff2c38f172b79:0xfe6667fef4aa39d0!8m2!3d8.4832214!4d124.6560484!16s%2Fg%2F11g6xrc284!19sChIJeSsXj8Py_zIR0Dmq9P5nZv4?authuser=0&hl=en&rclk=1"
+  },
+  {
     "name": "Corner Space PH",
     "rating": 4.5,
     "reviews": null,
@@ -81,15 +92,14 @@
     "url": "https://www.google.com/maps/place/Corner+Space+PH/data=!4m7!3m6!1s0x32ff8d0016f30d3b:0xc1dfcfc433b932ed!8m2!3d8.4670432!4d124.6440587!16s%2Fg%2F11yq7nd82j!19sChIJOw3zFgCN_zIR7TK5M8TP38E?authuser=0&hl=en&rclk=1"
   },
   {
-    "name": "Rosario Pavilion",
-    "rating": 4.2,
+    "name": "JAMMZ PARTY VENUE",
+    "rating": 5,
     "reviews": null,
     "info": [
-      "Function room facility",
-      "",
-      "Limketkai Center, Rosario Cres"
+      "Garden",
+      "Christian Subdivision, Cybelle’s Garden, FJ2V+84P, Saint Mary Street, Johnritz Ave"
     ],
-    "url": "https://www.google.com/maps/place/Rosario+Pavilion/data=!4m7!3m6!1s0x32fff2c38f172b79:0xfe6667fef4aa39d0!8m2!3d8.4832214!4d124.6560484!16s%2Fg%2F11g6xrc284!19sChIJeSsXj8Py_zIR0Dmq9P5nZv4?authuser=0&hl=en&rclk=1"
+    "url": "https://www.google.com/maps/place/JAMMZ+PARTY+VENUE/data=!4m7!3m6!1s0x32ff8d000f606bd7:0xe8a5643b6d521aa9!8m2!3d8.451453!4d124.643291!16s%2Fg%2F11yl6czz8w!19sChIJ12tgDwCN_zIRqRpSbTtkpeg?authuser=0&hl=en&rclk=1"
   },
   {
     "name": "The Pavilion at Uptown CDO",
@@ -146,16 +156,6 @@
     "url": "https://www.google.com/maps/place/Bella%27s+Place/data=!4m7!3m6!1s0x32ff8d86d6c842f1:0xc7945b2234dc998!8m2!3d8.4610319!4d124.6323043!16s%2Fg%2F11lyqrx_3g!19sChIJ8ULI1oaN_zIRmMlNI7JFeQw?authuser=0&hl=en&rclk=1"
   },
   {
-    "name": "The Garden of Apple",
-    "rating": 4.6,
-    "reviews": null,
-    "info": [
-      "Event venue",
-      "28 Melecia Homes St"
-    ],
-    "url": "https://www.google.com/maps/place/The+Garden+of+Apple/data=!4m7!3m6!1s0x32ff8d005bc25d1f:0xec5e227d76b95c72!8m2!3d8.4353216!4d124.6408334!16s%2Fg%2F11vzz3_f67!19sChIJH13CWwCN_zIRcly5dn0iXuw?authuser=0&hl=en&rclk=1"
-  },
-  {
     "name": "Don Pacifico Uptown",
     "rating": 5,
     "reviews": null,
@@ -166,6 +166,16 @@
       "Open 24 hours"
     ],
     "url": "https://www.google.com/maps/place/Don+Pacifico+Uptown/data=!4m7!3m6!1s0x32ff8d8f9b27a6fd:0x8b9ff30d513cc4e3!8m2!3d8.4573376!4d124.6209553!16s%2Fg%2F11scbzq6mc!19sChIJ_aYnm4-N_zIR48Q8UQ3zn4s?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "The Garden of Apple",
+    "rating": 4.6,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "28 Melecia Homes St"
+    ],
+    "url": "https://www.google.com/maps/place/The+Garden+of+Apple/data=!4m7!3m6!1s0x32ff8d005bc25d1f:0xec5e227d76b95c72!8m2!3d8.4353216!4d124.6408334!16s%2Fg%2F11vzz3_f67!19sChIJH13CWwCN_zIRcly5dn0iXuw?authuser=0&hl=en&rclk=1"
   },
   {
     "name": "Paras Hilltop",
@@ -293,6 +303,17 @@
     "url": "https://www.google.com/maps/place/Lapasan+Shalom+Center/data=!4m7!3m6!1s0x32fff2bf7cad93c9:0x2e90e227244abe61!8m2!3d8.4838103!4d124.6638357!16s%2Fg%2F11hbllfbfr!19sChIJyZOtfL_y_zIRYb5KJCfikC4?authuser=0&hl=en&rclk=1"
   },
   {
+    "name": "Capitol University Multi-Purpose Hall",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "Information Technology Building, Corrales Ext"
+    ],
+    "url": "https://www.google.com/maps/place/Capitol+University+Multi-Purpose+Hall/data=!4m7!3m6!1s0x32fff2e7e49062cb:0xfb0bd03c9024a240!8m2!3d8.4885814!4d124.6520752!16s%2Fg%2F11b6jc2fl6!19sChIJy2KQ5Ofy_zIRQKIkkDzQC_s?authuser=0&hl=en&rclk=1"
+  },
+  {
     "name": "Masters Venue",
     "rating": 5,
     "reviews": null,
@@ -311,17 +332,6 @@
       "Upper Macasandig, Cagayan de Oro City, 9000, Misamis Oriental"
     ],
     "url": "https://www.google.com/maps/place/Covadonga+Center+for+Culture+and+Sprituality/data=!4m7!3m6!1s0x32ff8d2bafe0f767:0xc6576f46c376d288!8m2!3d8.4592559!4d124.6447317!16s%2Fg%2F1hc1025q2!19sChIJZ_fgryuN_zIRiNJ2w0ZvV8Y?authuser=0&hl=en&rclk=1"
-  },
-  {
-    "name": "Capitol University Multi-Purpose Hall",
-    "rating": 5,
-    "reviews": null,
-    "info": [
-      "Function room facility",
-      "",
-      "Information Technology Building, Corrales Ext"
-    ],
-    "url": "https://www.google.com/maps/place/Capitol+University+Multi-Purpose+Hall/data=!4m7!3m6!1s0x32fff2e7e49062cb:0xfb0bd03c9024a240!8m2!3d8.4885814!4d124.6520752!16s%2Fg%2F11b6jc2fl6!19sChIJy2KQ5Ofy_zIRQKIkkDzQC_s?authuser=0&hl=en&rclk=1"
   },
   {
     "name": "Big M Square, Maandig Village",
@@ -636,16 +646,5 @@
       "Lumbia, Bypass"
     ],
     "url": "https://www.google.com/maps/place/Mio+Step%26Stef+Events/data=!4m7!3m6!1s0x32fff36fdcfdabe1:0xd2159aca5baae4c6!8m2!3d8.4919872!4d124.599403!16s%2Fg%2F11vkhh2635!19sChIJ4av93G_z_zIRxuSqW8qaFdI?authuser=0&hl=en&rclk=1"
-  },
-  {
-    "name": "Pulse Live Music Venue",
-    "rating": 4.1,
-    "reviews": null,
-    "info": [
-      "Live Music",
-      "FJGV+C83",
-      "Closed · Opens 9 PM"
-    ],
-    "url": "https://www.google.com/maps/place/Pulse+Live+Music+Venue/data=!4m7!3m6!1s0x32fff2d84df0065b:0x9574502c40c9a5c5!8m2!3d8.476012!4d124.643291!16s%2Fg%2F1wyc1w0j!19sChIJWwbwTdjy_zIRxaXJQCxQdJU?authuser=0&hl=en&rclk=1"
   }
 ]

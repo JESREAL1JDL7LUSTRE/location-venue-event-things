@@ -11,9 +11,8 @@ const SCROLL_DELAY  = 2000; // ms to wait after each scroll
 
 async function scrapeGoogleMaps(url) {
   const browser = await puppeteer.launch({
-    headless: false,          // set to true to run silently
-    defaultViewport: null,
-    args: ['--start-maximized'],
+    headless: true,
+    defaultViewport: { width: 1280, height: 900 },
   });
 
   const page = await browser.newPage();
