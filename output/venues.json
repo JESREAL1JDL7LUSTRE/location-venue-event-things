@@ -1,0 +1,651 @@
+[
+  {
+    "name": "Cove Garden Resort",
+    "rating": 4.7,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "Zone 3, Gusa, Old Road",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Cove+Garden+Resort/data=!4m7!3m6!1s0x32ffed4f1a37b2c3:0x551e2c08e7d7a150!8m2!3d8.4718096!4d124.7004011!16s%2Fg%2F11c5xn5xcl!19sChIJw7I3Gk_t_zIRUKHX5wgsHlU?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "My hub events place rental",
+    "rating": 2.8,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "9000 Cagayan de Oro National Hwy"
+    ],
+    "url": "https://www.google.com/maps/place/My+hub+events+place+rental/data=!4m7!3m6!1s0x32fff38d43a1822b:0xab1447a3c952671d!8m2!3d8.4783182!4d124.6754504!16s%2Fg%2F11hz1g9xtn!19sChIJK4KhQ43z_zIRHWdSyaNHFKs?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Station 5 Events Place",
+    "rating": 4.9,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "FM6V+XQC",
+      "Open 24 hours"
+    ],
+    "url": "https://www.google.com/maps/place/Station+5+Events+Place/data=!4m7!3m6!1s0x32ff93c5586a7c2b:0x4538c52fddc78162!8m2!3d8.4624319!4d124.694379!16s%2Fg%2F11tjywqnnc!19sChIJK3xqWMWT_zIRYoHH3S_FOEU?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Elarvee Event Venue",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "CJVV+C66, S Diversion Rd",
+      "Open 24 hours"
+    ],
+    "url": "https://www.google.com/maps/place/Elarvee+Event+Venue/data=!4m7!3m6!1s0x32ff8d1d144e24d5:0xf66610008c961b79!8m2!3d8.4435341!4d124.6430046!16s%2Fg%2F11bz0bcrb5!19sChIJ1SROFB2N_zIReRuWjAAQZvY?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Riverview Event Center",
+    "rating": 4.7,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "Purok 4 S Diversion Rd, Cagayan de Oro, Misamis Oriental Taguanao",
+      "Open · Closes 9 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Riverview+Event+Center/data=!4m7!3m6!1s0x32ff8d7f751b8799:0xf22248e1ea9919bb!8m2!3d8.4276217!4d124.63782!16s%2Fg%2F11nnn8cplz!19sChIJmYcbdX-N_zIRuxmZ6uFIIvI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Limketkai Atrium(The Atrium)",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Convention center",
+      "",
+      "Limketkai Mall, Limketkai Dr",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Limketkai+Atrium%28The+Atrium%29/data=!4m7!3m6!1s0x32fff2c435dbc291:0xd2bc2533d819912c!8m2!3d8.4815828!4d124.6560603!16s%2Fg%2F1tczbdz1!19sChIJkcLbNcTy_zIRLJEZ2DMlvNI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Corner Space PH",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "57th Avenue Tomas Saco St"
+    ],
+    "url": "https://www.google.com/maps/place/Corner+Space+PH/data=!4m7!3m6!1s0x32ff8d0016f30d3b:0xc1dfcfc433b932ed!8m2!3d8.4670432!4d124.6440587!16s%2Fg%2F11yq7nd82j!19sChIJOw3zFgCN_zIR7TK5M8TP38E?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Rosario Pavilion",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "Limketkai Center, Rosario Cres"
+    ],
+    "url": "https://www.google.com/maps/place/Rosario+Pavilion/data=!4m7!3m6!1s0x32fff2c38f172b79:0xfe6667fef4aa39d0!8m2!3d8.4832214!4d124.6560484!16s%2Fg%2F11g6xrc284!19sChIJeSsXj8Py_zIR0Dmq9P5nZv4?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "The Pavilion at Uptown CDO",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "Masterson Ave",
+      "Open 24 hours"
+    ],
+    "url": "https://www.google.com/maps/place/The+Pavilion+at+Uptown+CDO/data=!4m7!3m6!1s0x32ff8d13dcce6c93:0x4c107a28076059dc!8m2!3d8.4285376!4d124.617021!16s%2Fg%2F11wv0x2bmz!19sChIJk2zO3BON_zIR3FlgByh6EEw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "D' Events Venue CDO",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Mother of Perpetual Help Avenue",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/D%27+Events+Venue+CDO/data=!4m7!3m6!1s0x32fff3e00afd9adf:0x326a04e6841050e4!8m2!3d8.4987932!4d124.6235002!16s%2Fg%2F11k3kgv7w5!19sChIJ35r9CuDz_zIR5FAQhOYEajI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "SM Downtown Event Hall",
+    "rating": 4.8,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "5/F SM CDO Downtown Premier, Claro M. Recto Ave, cor Osmena St"
+    ],
+    "url": "https://www.google.com/maps/place/SM+Downtown+Event+Hall/data=!4m7!3m6!1s0x32fff39fb1d0afab:0x85aa1f8cda65249e!8m2!3d8.4844445!4d124.6538891!16s%2Fg%2F11v4m3fwyb!19sChIJq6_QsZ_z_zIRniRl2owfqoU?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "4 Kings Event Center Uptown",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "FJ3C+P5F, Pacific St"
+    ],
+    "url": "https://www.google.com/maps/place/4+Kings+Event+Center+Uptown/data=!4m7!3m6!1s0x32ff8db629ca91ef:0xcc4e70f9790ccb7f!8m2!3d8.4544509!4d124.6202588!16s%2Fg%2F11kbz8h8bx!19sChIJ75HKKbaN_zIRf8sMeflwTsw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Bella's Place",
+    "rating": 4.8,
+    "reviews": null,
+    "info": [
+      "Homestay",
+      "Near Fisrt star gasoline Station & Jms Motor Parts, Carinugan, Balongis"
+    ],
+    "url": "https://www.google.com/maps/place/Bella%27s+Place/data=!4m7!3m6!1s0x32ff8d86d6c842f1:0xc7945b2234dc998!8m2!3d8.4610319!4d124.6323043!16s%2Fg%2F11lyqrx_3g!19sChIJ8ULI1oaN_zIRmMlNI7JFeQw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "The Garden of Apple",
+    "rating": 4.6,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "28 Melecia Homes St"
+    ],
+    "url": "https://www.google.com/maps/place/The+Garden+of+Apple/data=!4m7!3m6!1s0x32ff8d005bc25d1f:0xec5e227d76b95c72!8m2!3d8.4353216!4d124.6408334!16s%2Fg%2F11vzz3_f67!19sChIJH13CWwCN_zIRcly5dn0iXuw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Don Pacifico Uptown",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "Block 14, Lot 1, Pueblo Business Park Town Don Pacifico Building Corner Atlantic St, Las Ramblas",
+      "Open 24 hours"
+    ],
+    "url": "https://www.google.com/maps/place/Don+Pacifico+Uptown/data=!4m7!3m6!1s0x32ff8d8f9b27a6fd:0x8b9ff30d513cc4e3!8m2!3d8.4573376!4d124.6209553!16s%2Fg%2F11scbzq6mc!19sChIJ_aYnm4-N_zIR48Q8UQ3zn4s?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Paras Hilltop",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "FM8J+4W"
+    ],
+    "url": "https://www.google.com/maps/place/Paras+Hilltop/data=!4m7!3m6!1s0x32ff8d0037ab8f4b:0x5c7a0952886333ba!8m2!3d8.4652318!4d124.682309!16s%2Fg%2F11xgfsb3v2!19sChIJS4-rNwCN_zIRujNjiFIJelw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Casa de Canitoan",
+    "rating": 4.6,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "Refined hotel with event space & a pool"
+    ],
+    "url": "https://www.google.com/maps/place/Casa+de+Canitoan/data=!4m10!3m9!1s0x32ff8bb992a6d17f:0x566d36a06c827d53!5m2!4m1!1i2!8m2!3d8.4739398!4d124.5966658!16s%2Fg%2F11gj71vj5j!19sChIJf9GmkrmL_zIRU32CbKA2bVY?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Migz Party and Venue Zone 7 Barra",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "GJ62+98G"
+    ],
+    "url": "https://www.google.com/maps/place/Migz+Party+and+Venue+Zone+7+Barra/data=!4m7!3m6!1s0x32fff382189a08a1:0xb47027e16fa513c2!8m2!3d8.5109415!4d124.6008424!16s%2Fg%2F11s0d5wzr1!19sChIJoQiaGILz_zIRwhOlb-EncLQ?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "D’Manor Event Center",
+    "rating": 2.8,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Zone 7, Barra Opol"
+    ],
+    "url": "https://www.google.com/maps/place/D%E2%80%99Manor+Event+Center/data=!4m7!3m6!1s0x32fff3abdf613495:0x987960760ef09977!8m2!3d8.5093495!4d124.5966238!16s%2Fg%2F11wfk7b5pc!19sChIJlTRh36vz_zIRd5nwDnZgeZg?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Ultrawinds Mahogany Hall",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "CJ8W+27J, Convention Center Access Rd"
+    ],
+    "url": "https://www.google.com/maps/place/Ultrawinds+Mahogany+Hall/data=!4m7!3m6!1s0x32ff8db62c714237:0xe99916074c0740d2!8m2!3d8.4150758!4d124.6456372!16s%2Fg%2F11h90ss3rw!19sChIJN0JxLLaN_zIR0kAHTAcWmek?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Balay sa Bukid",
+    "rating": 4.9,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Malasag"
+    ],
+    "url": "https://www.google.com/maps/place/Balay+sa+Bukid/data=!4m7!3m6!1s0x32ff93d12de079bb:0xf36fd9368fda934f!8m2!3d8.4580425!4d124.6915295!16s%2Fg%2F11w7kkrhvr!19sChIJu3ngLdGT_zIRT5PajzbZb_M?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Acasia Garden Venue",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Johnritz Ave",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Acasia+Garden+Venue/data=!4m7!3m6!1s0x32ff8d8e5a927d9f:0xcd8e5ee82b768b55!8m2!3d8.4508683!4d124.6445988!16s%2Fg%2F11w98zfxqw!19sChIJn32SWo6N_zIRVYt2K-hejs0?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Pimp Your Day Events Coordinator",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Wedding planner",
+      "Rivera Bldg, Door 3 Capistrano cor. Mabini Sts",
+      "Open · Closes 8 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Pimp+Your+Day+Events+Coordinator/data=!4m7!3m6!1s0x32fff2d8507ffcb7:0xfde3c9bb20869fd0!8m2!3d8.4810209!4d124.6435475!16s%2Fg%2F11cs0w30s7!19sChIJt_x_UNjy_zIR0J-GILvJ4_0?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Amaya Function",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "CMF4+GGV"
+    ],
+    "url": "https://www.google.com/maps/place/Amaya+Function/data=!4m7!3m6!1s0x32ff8d85eb16d793:0xa718590508ca583!8m2!3d8.4238596!4d124.656306!16s%2Fg%2F11gpnhsmhj!19sChIJk9cW64WN_zIRg6WMUJCFcQo?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Centrio Activity Center",
+    "rating": 4.1,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "G/F, Corrales Ave"
+    ],
+    "url": "https://www.google.com/maps/place/Centrio+Activity+Center/data=!4m7!3m6!1s0x32fff2dc935f41f1:0xa90777e0e7419ff2!8m2!3d8.4845521!4d124.6509251!16s%2Fg%2F11cnbl2nw5!19sChIJ8UFfk9zy_zIR8p9B5-B3B6k?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Molina - General Merchandise and Party Venue",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "FH5M+9QV, Pagatpat"
+    ],
+    "url": "https://www.google.com/maps/place/Molina+-+General+Merchandise+and+Party+Venue/data=!4m7!3m6!1s0x32ff8b005f9efb4d:0x3bdd2f58f37b58d3!8m2!3d8.4584819!4d124.5844154!16s%2Fg%2F11w9xr9l6y!19sChIJTfueXwCL_zIR01h781gv3Ts?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Lapasan Shalom Center",
+    "rating": 2,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "FMM7+GGG, Baconga St"
+    ],
+    "url": "https://www.google.com/maps/place/Lapasan+Shalom+Center/data=!4m7!3m6!1s0x32fff2bf7cad93c9:0x2e90e227244abe61!8m2!3d8.4838103!4d124.6638357!16s%2Fg%2F11hbllfbfr!19sChIJyZOtfL_y_zIRYb5KJCfikC4?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Masters Venue",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "CJM9+549, Masterson Ave"
+    ],
+    "url": "https://www.google.com/maps/place/Masters+Venue/data=!4m7!3m6!1s0x32ff8d0025ed1591:0xcdfbf96eae80cabb!8m2!3d8.4329052!4d124.6178629!16s%2Fg%2F11y76sv47l!19sChIJkRXtJQCN_zIRu8qArm75-80?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Covadonga Center for Culture and Sprituality",
+    "rating": 4.8,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "Upper Macasandig, Cagayan de Oro City, 9000, Misamis Oriental"
+    ],
+    "url": "https://www.google.com/maps/place/Covadonga+Center+for+Culture+and+Sprituality/data=!4m7!3m6!1s0x32ff8d2bafe0f767:0xc6576f46c376d288!8m2!3d8.4592559!4d124.6447317!16s%2Fg%2F1hc1025q2!19sChIJZ_fgryuN_zIRiNJ2w0ZvV8Y?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Capitol University Multi-Purpose Hall",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "Information Technology Building, Corrales Ext"
+    ],
+    "url": "https://www.google.com/maps/place/Capitol+University+Multi-Purpose+Hall/data=!4m7!3m6!1s0x32fff2e7e49062cb:0xfb0bd03c9024a240!8m2!3d8.4885814!4d124.6520752!16s%2Fg%2F11b6jc2fl6!19sChIJy2KQ5Ofy_zIRQKIkkDzQC_s?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Big M Square, Maandig Village",
+    "rating": 3.5,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "",
+      "CJXV+JXG, Maandig Ave"
+    ],
+    "url": "https://www.google.com/maps/place/Big+M+Square,+Maandig+Village/data=!4m7!3m6!1s0x32ff8d1f1d3f8d69:0x5597f443c30e415!8m2!3d8.4490695!4d124.6449412!16s%2Fg%2F11cp79_8dr!19sChIJaY0_HR-N_zIRFeQwPER_WQU?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Geguiera’s Events",
+    "rating": 4.4,
+    "reviews": null,
+    "info": [
+      "Bridal shop",
+      "42 28th St",
+      "Open · Closes 7 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Geguiera%E2%80%99s+Events/data=!4m7!3m6!1s0x32fff38b8987351f:0xe266b4553355ddce!8m2!3d8.4701657!4d124.6494862!16s%2Fg%2F11j025kbzy!19sChIJHzWHiYvz_zIRzt1VM1W0ZuI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "The Society Hall",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Mother of Perpetual Help Ave",
+      "Open · Closes 5 AM Wed"
+    ],
+    "url": "https://www.google.com/maps/place/The+Society+Hall/data=!4m7!3m6!1s0x32fff3a5e5ed8d61:0xa5889958a7265a71!8m2!3d8.4988377!4d124.6235379!16s%2Fg%2F11yn4145ff!19sChIJYY3t5aXz_zIRcVomp1iZiKU?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Kauswagan Barangay Hall",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "Zone 1"
+    ],
+    "url": "https://www.google.com/maps/place/Kauswagan+Barangay+Hall/data=!4m7!3m6!1s0x32fff31d121121dd:0x499f9d67cfbf6a43!8m2!3d8.4970671!4d124.6398997!16s%2Fg%2F11c5rp3fnj!19sChIJ3SEREh3z_zIRQ2q_z2edn0k?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "The Cafe by Benrose Hotel",
+    "rating": 4.4,
+    "reviews": null,
+    "info": [
+      "Cafe",
+      "976 Tiano Brothers St",
+      "Open · Closes 8 PM"
+    ],
+    "url": "https://www.google.com/maps/place/The+Cafe+by+Benrose+Hotel/data=!4m7!3m6!1s0x32fff376114dcb39:0x6243a7dcf3911f38!8m2!3d8.4773668!4d124.643502!16s%2Fg%2F11q8849055!19sChIJOctNEXbz_zIROB-R89ynQ2I?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Morning Mist Village Multipurpose Hall",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Village hall",
+      "FJ2C+WC6"
+    ],
+    "url": "https://www.google.com/maps/place/Morning+Mist+Village+Multipurpose+Hall/data=!4m7!3m6!1s0x32ff8ceaec00091b:0x12df5fd6d6aa06c4!8m2!3d8.4522751!4d124.6210004!16s%2Fg%2F11f3p8gq55!19sChIJGwkA7OqM_zIRxAaq1tZf3xI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Rodelsa Hall",
+    "rating": 4.4,
+    "reviews": null,
+    "info": [
+      "Performing arts theater",
+      "",
+      "Rodelsa Hall, Rodolfo N. Pelaez Blvd"
+    ],
+    "url": "https://www.google.com/maps/place/Rodelsa+Hall/data=!4m7!3m6!1s0x32fff320e0ef5963:0x56dfa271bc72cb6c!8m2!3d8.4860771!4d124.6390687!16s%2Fg%2F1trc2gyh!19sChIJY1nv4CDz_zIRbMtyvHGi31Y?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Mama Mia Garden & Venue",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Crossing Alegria, Indahag Rd"
+    ],
+    "url": "https://www.google.com/maps/place/Mama+Mia+Garden+%26+Venue/data=!4m7!3m6!1s0x32ff8d1e063af935:0x3fec539c28b22fde!8m2!3d8.4501081!4d124.6488162!16s%2Fg%2F11vl0q4rkx!19sChIJNfk6Bh6N_zIR3i-yKJxT7D8?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Barangay Hall",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "FMH4+79W, Limketkai Dr"
+    ],
+    "url": "https://www.google.com/maps/place/Barangay+Hall/data=!4m7!3m6!1s0x32fff2c5880f19cb:0x82e33a49698d4fff!8m2!3d8.4782262!4d124.6559519!16s%2Fg%2F11c5xtxznp!19sChIJyxkPiMXy_zIR_0-NaUk644I?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Camaman-an Barangay Hall",
+    "rating": 4.4,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "FMF6+FPJ camaman.an barangay hall sun.apr.19, Hayes St"
+    ],
+    "url": "https://www.google.com/maps/place/Camaman-an+Barangay+Hall/data=!4m7!3m6!1s0x32fff2c991667d5d:0xefdbf9bd201fe02a!8m2!3d8.47372!4d124.6617633!16s%2Fg%2F11c525q2r9!19sChIJXX1mkcny_zIRKuAfIL352-8?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "KDA Wedding & Event Services",
+    "rating": 4.1,
+    "reviews": null,
+    "info": [
+      "Bridal shop",
+      "",
+      "FJJV+8CR, Corner Capistrano St, Gomez St",
+      "Open · Closes 6:30 PM"
+    ],
+    "url": "https://www.google.com/maps/place/KDA+Wedding+%26+Event+Services/data=!4m7!3m6!1s0x32fff2d84f492117:0x7160c7bedc3b3b2e!8m2!3d8.4808726!4d124.643513!16s%2Fg%2F11c5rsp2hv!19sChIJFyFJT9jy_zIRLjs73L7HYHE?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Cagayan de Oro International Convention Center",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Conference center",
+      "",
+      "Convention Center Access Rd"
+    ],
+    "url": "https://www.google.com/maps/place/Cagayan+de+Oro+International+Convention+Center/data=!4m7!3m6!1s0x32ff8db36a78b0f3:0xd74e002019b185b0!8m2!3d8.4198077!4d124.642904!16s%2Fg%2F11kyf9t8tb!19sChIJ87B4arON_zIRsIWxGSAATtc?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Macasandig Barangay Hall",
+    "rating": 4.1,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "FJ8V+5RV, Tomas Saco St",
+      "Open 24 hours"
+    ],
+    "url": "https://www.google.com/maps/place/Macasandig+Barangay+Hall/data=!4m7!3m6!1s0x32ff8d2bd6886b73:0x724e54d8c2c41fa4!8m2!3d8.4654958!4d124.6445623!16s%2Fg%2F12hk8x6rv!19sChIJc2uI1iuN_zIRpB_EwthUTnI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "JTS Community Center",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "FJFX+2FR Barangay, 7th St"
+    ],
+    "url": "https://www.google.com/maps/place/JTS+Community+Center/data=!4m7!3m6!1s0x32fff2d3bc9a5217:0xa1f5d76723411fb6!8m2!3d8.4726087!4d124.6486302!16s%2Fg%2F11c5s8r6v_!19sChIJF1KavNPy_zIRth9BI2fX9aE?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Barangay 29 Hall",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "FJJW+6W2, Corrales Ave",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Barangay+29+Hall/data=!4m7!3m6!1s0x32fff2da21541409:0x791540edb1024e2c!8m2!3d8.4805087!4d124.6472671!16s%2Fg%2F1hm417sxn!19sChIJCRRUIdry_zIRLE4Cse1AFXk?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Nazareth Barangay Hall",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "FJ9X+G99, 24th St",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Nazareth+Barangay+Hall/data=!4m7!3m6!1s0x32ff8d2cbed5dae5:0x8c23fcee34daf1ef!8m2!3d8.4687995!4d124.6484897!16s%2Fg%2F1hf4xvq0g!19sChIJ5drVviyN_zIR7_HaNO78I4w?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Buenavista Village Patag",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Village hall",
+      "FJPH+XXH, Mother of Pepertual Help Ave",
+      "Closed · Opens 12 AM Sun"
+    ],
+    "url": "https://www.google.com/maps/place/Buenavista+Village+Patag/data=!4m7!3m6!1s0x32fff33cd3cbf96d:0x2c648990b88d15f6!8m2!3d8.4874383!4d124.6299955!16s%2Fg%2F11g8bwrjlg!19sChIJbfnL0zzz_zIR9hWNuJCJZCw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Lapasan Barangay Hall",
+    "rating": 4.2,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "81 Claro M. Recto Ave",
+      "Closed · Opens 9 AM Sun"
+    ],
+    "url": "https://www.google.com/maps/place/Lapasan+Barangay+Hall/data=!4m7!3m6!1s0x32fff2bf6be18857:0xfb6f6fc923cad618!8m2!3d8.4833394!4d124.6646873!16s%2Fg%2F1tdyc4nn!19sChIJV4jha7_y_zIRGNbKI8lvb_s?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Divine Mercy Village Multi Purpose Hall",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Village hall",
+      "GH78+42X"
+    ],
+    "url": "https://www.google.com/maps/place/Divine+Mercy+Village+Multi+Purpose+Hall/data=!4m7!3m6!1s0x32fff4f775aa948b:0x518a7482ce5789cb!8m2!3d8.5128595!4d124.5651207!16s%2Fg%2F11g6bh50t3!19sChIJi5Sqdff0_zIRy4lXzoJ0ilE?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Knights of Columbus Hall",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "FJGR+5FM"
+    ],
+    "url": "https://www.google.com/maps/place/Knights+of+Columbus+Hall/data=!4m7!3m6!1s0x32fff35d21d79a09:0x39e41fcadb17163f!8m2!3d8.4754666!4d124.6411495!16s%2Fg%2F11vdhfqtjw!19sChIJCZrXIV3z_zIRPxYX28of5Dk?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Gaisano Mall,Barangay - 26, Barangay Hall",
+    "rating": 4.8,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "Gaisano Mall, Dispatcher"
+    ],
+    "url": "https://www.google.com/maps/place/Gaisano+Mall,Barangay+-+26,+Barangay+Hall/data=!4m7!3m6!1s0x32fff2c31d670d05:0x3028b228f0faa0e2!8m2!3d8.4862589!4d124.649811!16s%2Fg%2F11c5sgz5sb!19sChIJBQ1nHcPy_zIR4qD68CiyKDA?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Rice N' Bowl",
+    "rating": 5,
+    "reviews": null,
+    "info": [
+      "Village hall",
+      "Francisco Corrales St",
+      "Open · Closes 8 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Rice+N%27+Bowl/data=!4m7!3m6!1s0x32fff3847a985101:0x115cf60a3d721c9e!8m2!3d8.4970599!4d124.6201591!16s%2Fg%2F11rxzfbwn0!19sChIJAVGYeoTz_zIRnhxyPQr2XBE?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Bulua Barangay Hall",
+    "rating": 4.6,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "",
+      "GJ38+MC2, Butuan - Cagayan de Oro - Iligan Rd",
+      "Open · Closes 5 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Bulua+Barangay+Hall/data=!4m7!3m6!1s0x32fff373a398c3fb:0xacb1782a25694a7e!8m2!3d8.5041399!4d124.6160102!16s%2Fg%2F1ptzlqtyj!19sChIJ-8OYo3Pz_zIRfkppJSp4saw?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Mau Court",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Function room facility",
+      "FMJ3+6XF, Rosario Cres"
+    ],
+    "url": "https://www.google.com/maps/place/Mau+Court/data=!4m7!3m6!1s0x32fff32d77a506ff:0xfb96aeb8dac69257!8m2!3d8.4805575!4d124.6549183!16s%2Fg%2F11g4d228yp!19sChIJ_waldy3z_zIRV5LG2riulvs?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Barangay 18 Brgy Hall",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Community center",
+      "FJPW+P83"
+    ],
+    "url": "https://www.google.com/maps/place/Barangay+18+Brgy+Hall/data=!4m7!3m6!1s0x32fff2de66e1bf5d:0x69ab83e1258ac409!8m2!3d8.4867507!4d124.6458003!16s%2Fg%2F11c1p3s98r!19sChIJXb_hZt7y_zIRCcSKJeGDq2k?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Cagayan De Oro Sports Arena",
+    "rating": 3.8,
+    "reviews": null,
+    "info": [
+      "Arena",
+      "FJGJ+MRQ, Gumamela Ext"
+    ],
+    "url": "https://www.google.com/maps/place/Cagayan+De+Oro+Sports+Arena/data=!4m7!3m6!1s0x32fff3297751a783:0xa38277733250484c!8m2!3d8.4767127!4d124.6321162!16s%2Fg%2F11c2k_nd4c!19sChIJg6dRdynz_zIRTEhQMnN3gqM?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Samichella's Creations and Event Organizer",
+    "rating": 4.3,
+    "reviews": null,
+    "info": [
+      "Wedding planner",
+      "150 Capistrano St",
+      "Open now"
+    ],
+    "url": "https://www.google.com/maps/place/Samichella%27s+Creations+and+Event+Organizer/data=!4m7!3m6!1s0x32fff2d920785941:0x92191b42d3267964!8m2!3d8.4843128!4d124.6450197!16s%2Fg%2F1pzsmjgbw!19sChIJQVl4INny_zIRZHkm00IbGZI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Superstar KTV Lounge and Club",
+    "rating": 4.5,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "",
+      "Cagayan Town Center, Capt. Vicente Roa Street, Corner Gen A. Luna St",
+      "Closed · Opens 5:30 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Superstar+KTV+Lounge+and+Club/data=!4m7!3m6!1s0x32fff3e6204633f1:0x131456d2f07cf915!8m2!3d8.4831437!4d124.6509284!16s%2Fg%2F11s83q_nbq!19sChIJ8TNGIObz_zIRFfl88NJWFBM?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Mio Step&Stef Events",
+    "rating": null,
+    "reviews": null,
+    "info": [
+      "Event venue",
+      "Lumbia, Bypass"
+    ],
+    "url": "https://www.google.com/maps/place/Mio+Step%26Stef+Events/data=!4m7!3m6!1s0x32fff36fdcfdabe1:0xd2159aca5baae4c6!8m2!3d8.4919872!4d124.599403!16s%2Fg%2F11vkhh2635!19sChIJ4av93G_z_zIRxuSqW8qaFdI?authuser=0&hl=en&rclk=1"
+  },
+  {
+    "name": "Pulse Live Music Venue",
+    "rating": 4.1,
+    "reviews": null,
+    "info": [
+      "Live Music",
+      "FJGV+C83",
+      "Closed · Opens 9 PM"
+    ],
+    "url": "https://www.google.com/maps/place/Pulse+Live+Music+Venue/data=!4m7!3m6!1s0x32fff2d84df0065b:0x9574502c40c9a5c5!8m2!3d8.476012!4d124.643291!16s%2Fg%2F1wyc1w0j!19sChIJWwbwTdjy_zIRxaXJQCxQdJU?authuser=0&hl=en&rclk=1"
+  }
+]
