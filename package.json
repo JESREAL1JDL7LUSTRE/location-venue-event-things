@@ -5,16 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "scrape": "node src/index.js",
+    "map": "node src/buildMap.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "chalk": "^5.6.2",
     "cheerio": "^1.2.0",
+    "commander": "^15.0.0",
     "got": "^15.0.5",
     "p-limit": "^7.3.0",
+    "p-retry": "^8.0.0",
     "puppeteer": "^25.1.0"
   }
 }
