@@ -1,4 +1,145 @@
-[
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Venues – Cagayan de Oro</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 360px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      z-index: 1000;
+    }
+
+    #sidebar-header {
+      padding: 14px 16px 10px;
+      background: #1a73e8;
+      color: #fff;
+    }
+    #sidebar-header h1 { font-size: 15px; font-weight: 600; }
+    #sidebar-header p  { font-size: 12px; opacity: .8; margin-top: 2px; }
+
+    #search-box {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+    }
+    #search-box input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 13px;
+      outline: none;
+    }
+    #search-box input:focus { border-color: #1a73e8; }
+
+    #venue-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .venue-card {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .venue-card:hover       { background: #f8f9ff; }
+    .venue-card.active      { background: #e8f0fe; border-left: 3px solid #1a73e8; }
+
+    .venue-card .vc-name    { font-size: 14px; font-weight: 600; color: #202124; }
+    .venue-card .vc-cat     { font-size: 11px; color: #70757a; margin-top: 2px; }
+    .venue-card .vc-addr    { font-size: 11px; color: #5f6368; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .venue-card .vc-meta    { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+    .vc-rating              { font-size: 12px; color: #e37400; font-weight: 600; }
+    .vc-reviews             { font-size: 11px; color: #70757a; }
+    .vc-hours               { font-size: 11px; }
+    .vc-hours.open          { color: #188038; }
+    .vc-hours.closed        { color: #d93025; }
+
+    /* ── Map ── */
+    #map { flex: 1; }
+
+    /* ── Popup ── */
+    .lf-popup {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      min-width: 240px;
+      max-width: 300px;
+    }
+    .lf-popup h3 { font-size: 15px; font-weight: 600; color: #202124; margin-bottom: 6px; }
+    .lf-popup .pop-row { display: flex; gap: 6px; margin-top: 4px; color: #5f6368; }
+    .lf-popup .pop-row .icon { flex-shrink: 0; width: 16px; text-align: center; }
+    .lf-popup .pop-hours.open   { color: #188038; font-weight: 500; }
+    .lf-popup .pop-hours.closed { color: #d93025; font-weight: 500; }
+    .lf-popup .pop-link { display: inline-block; margin-top: 8px; font-size: 12px; color: #1a73e8; text-decoration: none; }
+    .lf-popup .pop-link:hover { text-decoration: underline; }
+    .lf-popup .pop-rating { color: #e37400; font-weight: 600; }
+    .lf-popup .pop-section { margin-top: 8px; }
+    .lf-popup .pop-section-title { font-weight: 600; color: #202124; font-size: 12px; margin-bottom: 3px; }
+    .lf-popup .pop-tag {
+      display: inline-block;
+      background: #f1f3f4;
+      border-radius: 12px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #5f6368;
+      margin: 2px 2px 0 0;
+    }
+    .lf-popup .pop-hours-table { font-size: 11px; margin-top: 4px; width: 100%; border-collapse: collapse; }
+    .lf-popup .pop-hours-table td { padding: 1px 4px; }
+    .lf-popup .pop-hours-table td:first-child { color: #202124; font-weight: 500; width: 90px; }
+    .lf-popup .pop-hours-table td:last-child { color: #5f6368; }
+
+    /* stat pills on sidebar */
+    #stats {
+      padding: 6px 14px;
+      font-size: 11px;
+      color: #70757a;
+      border-bottom: 1px solid #eee;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div id="sidebar-header">
+    <h1>Event Venues</h1>
+    <p>Cagayan de Oro &amp; surroundings</p>
+  </div>
+  <div id="search-box">
+    <input id="search" type="text" placeholder="Search venues…" />
+  </div>
+  <div id="stats"></div>
+  <div id="venue-list"></div>
+</div>
+
+<div id="map"></div>
+
+<script>
+// ── Load venue data ────────────────────────────────────────────────────────────
+const RAW = [
   {
     "name": "Cove Garden Resort",
     "rating": 4.7,
@@ -9907,4 +10048,231 @@
       ]
     }
   }
-]
+];
+
+// ── Parse lat/lng from Google Maps URL ────────────────────────────────────────
+function parseCoords(url) {
+  if (!url) return null;
+  const m = url.match(/!3d(-?[\d.]+)!4d(-?[\d.]+)/);
+  return m ? { lat: parseFloat(m[1]), lng: parseFloat(m[2]) } : null;
+}
+
+// ── Clean hours label ─────────────────────────────────────────────────────────
+function cleanHours(h) {
+  if (!h) return null;
+  return h.replace(/,?\s*Copy open hours/gi, '').trim();
+}
+
+// ── Enrich venues with coords ─────────────────────────────────────────────────
+const venues = RAW
+  .map((v) => ({ ...v, coords: parseCoords(v.url) }))
+  .filter((v) => v.coords); // drop venues without coords
+
+// ── Build map ─────────────────────────────────────────────────────────────────
+const avgLat = venues.reduce((s, v) => s + v.coords.lat, 0) / venues.length;
+const avgLng = venues.reduce((s, v) => s + v.coords.lng, 0) / venues.length;
+
+const map = L.map('map').setView([avgLat, avgLng], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+// Custom pin icon
+function makeIcon(color = '#1a73e8') {
+  return L.divIcon({
+    className: '',
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -30],
+    html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+      <path d="M14 0C6.27 0 0 6.27 0 14c0 9.6 14 22 14 22S28 23.6 28 14C28 6.27 21.73 0 14 0z" fill="${color}"/>
+      <circle cx="14" cy="14" r="6" fill="#fff"/>
+    </svg>`,
+  });
+}
+
+// ── Build popup HTML ──────────────────────────────────────────────────────────
+function buildPopup(v) {
+  const d = v.details ?? {};
+  const hoursStatus = v.location?.hours ?? '';
+  const hoursClass  = /^open/i.test(hoursStatus) ? 'open' : hoursStatus ? 'closed' : '';
+  const stars       = v.rating ? '★'.repeat(Math.round(v.rating)) + '☆'.repeat(5 - Math.round(v.rating)) : '';
+
+  let html = `<div class="lf-popup">`;
+  html += `<h3>${v.name}</h3>`;
+
+  if (v.rating) {
+    html += `<div class="pop-row">
+      <span class="icon">⭐</span>
+      <span class="pop-rating">${v.rating}</span>
+      <span style="color:#e37400">${stars}</span>
+      ${d.reviewCount ? `<span style="color:#70757a">(${d.reviewCount.toLocaleString()} reviews)</span>` : ''}
+    </div>`;
+  }
+
+  if (v.location?.category) {
+    html += `<div class="pop-row"><span class="icon">🏷</span><span>${v.location.category}</span></div>`;
+  }
+
+  if (d.fullAddress) {
+    html += `<div class="pop-row"><span class="icon">📍</span><span>${d.fullAddress}</span></div>`;
+  }
+
+  if (d.locatedIn) {
+    html += `<div class="pop-row"><span class="icon">🏢</span><span>Located in: ${d.locatedIn}</span></div>`;
+  }
+
+  if (d.plusCode) {
+    html += `<div class="pop-row"><span class="icon">🔲</span><span>${d.plusCode}</span></div>`;
+  }
+
+  if (hoursStatus) {
+    html += `<div class="pop-row">
+      <span class="icon">🕐</span>
+      <span class="pop-hours ${hoursClass}">${hoursStatus}</span>
+    </div>`;
+  }
+
+  if (d.phone) {
+    html += `<div class="pop-row"><span class="icon">📞</span><span>${d.phone}</span></div>`;
+  }
+
+  // Weekly hours table
+  if (d.weeklyHours && Object.keys(d.weeklyHours).length) {
+    const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    html += `<div class="pop-section">
+      <div class="pop-section-title">Weekly Hours</div>
+      <table class="pop-hours-table">`;
+    for (const day of DAYS) {
+      if (d.weeklyHours[day]) {
+        html += `<tr><td>${day}</td><td>${cleanHours(d.weeklyHours[day])}</td></tr>`;
+      }
+    }
+    html += `</table></div>`;
+  }
+
+  // Feature labels (accessibility, service options, etc.)
+  if (d.featureLabels?.length) {
+    html += `<div class="pop-section">
+      <div class="pop-section-title">Features</div>
+      <div>${d.featureLabels.map((f) => `<span class="pop-tag">${f}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  // Description
+  if (d.description) {
+    html += `<div class="pop-section" style="color:#5f6368;font-size:12px">${d.description.slice(0, 200)}${d.description.length > 200 ? '…' : ''}</div>`;
+  }
+
+  // Top reviews
+  if (d.reviews?.length) {
+    html += `<div class="pop-section"><div class="pop-section-title">Reviews</div>`;
+    for (const r of d.reviews.slice(0, 2)) {
+      html += `<div style="margin-top:5px;font-size:11px;color:#5f6368">
+        <b style="color:#202124">${r.author ?? 'Anonymous'}</b>
+        ${r.rating ? `<span style="color:#e37400"> ${'★'.repeat(r.rating)}</span>` : ''}
+        ${r.date ? `<span style="color:#9aa0a6"> · ${r.date}</span>` : ''}
+        ${r.text ? `<div style="margin-top:2px">${r.text.slice(0, 120)}${r.text.length > 120 ? '…' : ''}</div>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Links
+  html += `<div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap">`;
+  if (d.website) html += `<a class="pop-link" href="${d.website}" target="_blank">🌐 Website</a>`;
+  if (v.url)     html += `<a class="pop-link" href="${v.url}" target="_blank">🗺 Google Maps</a>`;
+  html += `</div>`;
+
+  html += `</div>`;
+  return html;
+}
+
+// ── Sidebar card ──────────────────────────────────────────────────────────────
+function buildCard(v, index) {
+  const d = v.details ?? {};
+  const hoursStatus = v.location?.hours ?? '';
+  const hoursClass  = /^open/i.test(hoursStatus) ? 'open' : hoursStatus ? 'closed' : '';
+  const addr        = d.fullAddress ?? v.location?.address ?? '';
+
+  return `<div class="venue-card" data-index="${index}" title="${v.name}">
+    <div class="vc-name">${v.name}</div>
+    <div class="vc-cat">${v.location?.category ?? ''}</div>
+    ${addr ? `<div class="vc-addr">${addr}</div>` : ''}
+    <div class="vc-meta">
+      ${v.rating ? `<span class="vc-rating">★ ${v.rating}</span>` : ''}
+      ${d.reviewCount ? `<span class="vc-reviews">(${d.reviewCount.toLocaleString()})</span>` : ''}
+      ${hoursStatus ? `<span class="vc-hours ${hoursClass}">${hoursStatus}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+let markers = [];
+let activeIndex = null;
+
+function render(list) {
+  // Sidebar
+  const listEl = document.getElementById('venue-list');
+  listEl.innerHTML = list.map((v, i) => buildCard(v, venues.indexOf(v))).join('');
+
+  // Stats
+  document.getElementById('stats').textContent =
+    `${list.length} venue${list.length !== 1 ? 's' : ''} shown`;
+
+  // Map markers
+  markers.forEach((m) => m.remove());
+  markers = list.map((v) => {
+    const idx = venues.indexOf(v);
+    const marker = L.marker([v.coords.lat, v.coords.lng], { icon: makeIcon() })
+      .addTo(map)
+      .bindPopup(buildPopup(v), { maxWidth: 320 });
+
+    marker.on('click', () => selectVenue(idx));
+    return marker;
+  });
+
+  // Sidebar click
+  listEl.querySelectorAll('.venue-card').forEach((card) => {
+    card.addEventListener('click', () => selectVenue(parseInt(card.dataset.index, 10)));
+  });
+}
+
+function selectVenue(idx) {
+  const v = venues[idx];
+  if (!v) return;
+
+  // Highlight sidebar card
+  document.querySelectorAll('.venue-card').forEach((c) => c.classList.remove('active'));
+  const card = document.querySelector(`.venue-card[data-index="${idx}"]`);
+  if (card) { card.classList.add('active'); card.scrollIntoView({ block: 'nearest' }); }
+
+  // Pan map and open popup
+  map.setView([v.coords.lat, v.coords.lng], 16, { animate: true });
+  const markerIdx = currentList.indexOf(v);
+  if (markerIdx >= 0 && markers[markerIdx]) markers[markerIdx].openPopup();
+
+  activeIndex = idx;
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+let currentList = [...venues];
+
+document.getElementById('search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  currentList = q
+    ? venues.filter((v) =>
+        v.name.toLowerCase().includes(q) ||
+        (v.location?.category ?? '').toLowerCase().includes(q) ||
+        (v.details?.fullAddress ?? '').toLowerCase().includes(q),
+      )
+    : [...venues];
+  render(currentList);
+});
+
+// ── Initial render ────────────────────────────────────────────────────────────
+render(currentList);
+</script>
+</body>
+</html>
