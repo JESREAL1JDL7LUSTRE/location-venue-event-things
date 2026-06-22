@@ -4,22 +4,44 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts",
+    "start:server": "tsx src/server.ts",
+    "start:cli": "tsx src/cli.ts",
     "start": "node src/index.js",
-    "scrape": "node src/index.js",
-    "map": "node src/buildMap.js"
+    "scrape": "tsx src/cli.ts scrape",
+    "map": "tsx src/buildMap.js",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit introspect",
+    "db:studio": "drizzle-kit studio",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
+    "@hono/node-server": "^2.0.5",
+    "@neondatabase/serverless": "^1.1.0",
     "chalk": "^5.6.2",
     "cheerio": "^1.2.0",
     "commander": "^15.0.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "got": "^15.0.5",
+    "hono": "^4.12.26",
     "p-limit": "^7.3.0",
     "p-retry": "^8.0.0",
-    "puppeteer": "^25.1.0"
+    "playwright": "^1.61.0",
+    "playwright-stealth": "^0.0.1",
+    "puppeteer": "^25.1.0",
+    "slugify": "^1.6.9"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
   }
 }
