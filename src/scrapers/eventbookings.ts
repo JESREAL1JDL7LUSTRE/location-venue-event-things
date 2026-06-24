@@ -5,7 +5,7 @@ import { saveEvents, saveOrganizers } from './save.js';
 
 const EXPLORE_API = 'https://explore.eventbookings.com/api/explore-events';
 const SITE = 'https://www.eventbookings.com';
-const SOURCE_URL = `${SITE}/s/all-events?country=Philippines`;
+const SOURCE_URL = `${SITE}/b/explore`;
 const HEADERS = { 'User-Agent': 'Mozilla/5.0 (compatible; EventScraper/1.0)', 'Content-Type': 'application/x-www-form-urlencoded' };
 const PAGE_SIZE = 20;
 
@@ -34,11 +34,15 @@ const fetchListings = async (): Promise<Array<{ url: string; imageUrl: string }>
         headers: HEADERS,
         body,
         timeout: { request: 25_000 },
-      }).json<{ data?: Array<{ url?: string; image?: string }> }>();
-      const data = resp.data ?? [];
+      }).json<{ events?: Array<{ url?: string; thumbnail?: string }> }>();
+      const data = resp.events ?? [];
       if (!data.length) break;
       for (const item of data) {
-        if (item.url) items.push({ url: item.url, imageUrl: item.image ?? '' });
+        if (item.url) {
+          const thumb = item.thumbnail ?? '';
+          const imageUrl = thumb.startsWith('http') ? thumb : thumb ? `${SITE}/${thumb}` : '';
+          items.push({ url: item.url, imageUrl });
+        }
       }
       if (data.length < PAGE_SIZE) break;
       position += data.length;
