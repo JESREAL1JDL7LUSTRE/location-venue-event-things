@@ -31,14 +31,14 @@ searchQueriesRouter.post('/', async (c) => {
   const data = await c.req.json();
   const query = (data?.query ?? '').trim();
   const source = (data?.source ?? '').trim();
-  if (!query || !source) return c.json({ error: 'query and source are required' }, 400);
+  if (!query) return c.json({ error: 'query is required' }, 400);
 
   const existing = await db
     .select({ id: eventsSearchquery.id })
     .from(eventsSearchquery)
-    .where(and(eq(eventsSearchquery.query, query), eq(eventsSearchquery.source, source)))
+    .where(eq(eventsSearchquery.query, query))
     .limit(1);
-  if (existing.length) return c.json({ error: 'Query already exists for this source' }, 409);
+  if (existing.length) return c.json({ error: 'Query already exists' }, 409);
 
   const now = new Date().toISOString();
   const inserted = await db

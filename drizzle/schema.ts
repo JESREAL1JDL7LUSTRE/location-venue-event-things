@@ -252,7 +252,8 @@ export const eventsSearchquery = pgTable("events_searchquery", {
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({ name: "events_searchquery_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 9223372036854775807, cache: 1 }),
 	query: varchar({ length: 500 }).notNull(),
-	source: varchar({ length: 120 }).notNull(),
+	// source is a legacy field (was scraper key); now blank=True, default='' after migration 0022
+	source: varchar({ length: 120 }).notNull().default(''),
 	isActive: boolean("is_active").notNull(),
 	lastRunAt: timestamp("last_run_at", { withTimezone: true, mode: 'string' }),
 	eventsFoundCount: integer("events_found_count").notNull(),
@@ -260,7 +261,8 @@ export const eventsSearchquery = pgTable("events_searchquery", {
 	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).notNull(),
 }, (table) => [
 	index("events_searchquery_is_active_4a99a794").using("btree", table.isActive.asc().nullsLast().op("bool_ops")),
-	unique("unique_source_query").on(table.source, table.query),
+	// unique_source_query was dropped in migration 0022; replaced by unique_query on query alone
+	unique("unique_query").on(table.query),
 ]);
 
 export const eventsScraperrun = pgTable("events_scraperrun", {
