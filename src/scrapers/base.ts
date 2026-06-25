@@ -46,6 +46,9 @@ export interface ScrapedEvent {
   sourceUrl?: string;
   organizer?: string;
   organizerUrl?: string;
+  registrationUrl?: string;
+  rawText?: string;
+  postDate?: Date | null;
   venue?: ScrapedVenue | null;
 }
 

@@ -235,7 +235,7 @@ export const saveEvents = async (
 
     const organizerRefId = await resolveOrganizer(se.organizerUrl, se.organizer);
 
-    const fields = {
+    const coreFields = {
       name: se.name,
       description: se.description ?? '',
       venueId,
@@ -251,9 +251,17 @@ export const saveEvents = async (
       source,
       sourceUrl: se.sourceUrl ?? '',
       externalId: se.externalId ?? '',
+      registrationUrl: se.registrationUrl ?? '',
       scrapedAt: now,
       updatedAt: now,
     };
+
+    // Only write rawText/postDate when provided — never clear existing values on re-scrape
+    const optFields: { rawText?: string; postDate?: string } = {};
+    if (se.rawText) optFields.rawText = se.rawText;
+    if (se.postDate != null) optFields.postDate = se.postDate.toISOString();
+
+    const fields = { ...coreFields, ...optFields };
 
     if (existing) {
       await db.update(eventsEvent).set(fields).where(eq(eventsEvent.id, existing.id));
@@ -266,7 +274,7 @@ export const saveEvents = async (
         .values({
           slug,
           agentCategories: [],
-          registrationUrl: '',
+          rawText: '',
           createdAt: now,
           ...fields,
         })

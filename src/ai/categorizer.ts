@@ -4,19 +4,20 @@ import { db } from '../db/client.js';
 import { eventsEvent } from '../../drizzle/schema.js';
 
 const CANONICAL_CATEGORIES = [
-  'Business & Professional',
-  'Arts & Culture',
-  'Music & Concerts',
-  'Food & Drink',
+  'Fun Run',
+  'Trail Run',
+  'Triathlon',
+  'Cycling',
+  'Swimming',
   'Sports & Fitness',
-  'Health & Wellness',
-  'Community & Causes',
-  'Technology',
-  'Education & Learning',
-  'Family & Kids',
-  'Travel & Outdoors',
-  'Fashion & Beauty',
-  'Nightlife & Entertainment',
+  'Music & Concert',
+  'Festival',
+  'Conference',
+  'Workshop',
+  'Food & Dining',
+  'Arts & Culture',
+  'Theater',
+  'Charity',
   'Other',
 ] as const;
 

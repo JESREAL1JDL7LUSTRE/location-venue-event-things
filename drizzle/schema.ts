@@ -222,10 +222,14 @@ export const eventsEvent = pgTable("events_event", {
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	searchQueryId: bigint("search_query_id", { mode: "number" }),
 	registrationUrl: varchar("registration_url", { length: 2000 }).notNull(),
+	rawText: text("raw_text").notNull().default(''),
+	postDate: timestamp("post_date", { withTimezone: true, mode: 'string' }),
+	enrichedAt: timestamp("enriched_at", { withTimezone: true, mode: 'string' }),
 }, (table) => [
 	index("events_event_external_id_3614f13d").using("btree", table.externalId.asc().nullsLast().op("text_ops")),
 	index("events_event_external_id_3614f13d_like").using("btree", table.externalId.asc().nullsLast().op("varchar_pattern_ops")),
 	index("events_event_organizer_ref_id_6162f247").using("btree", table.organizerRefId.asc().nullsLast().op("int8_ops")),
+	index("events_event_post_date_idx").using("btree", table.postDate.asc().nullsLast().op("timestamptz_ops")),
 	index("events_event_search_query_id_32555112").using("btree", table.searchQueryId.asc().nullsLast().op("int8_ops")),
 	index("events_event_slug_b44b2c04_like").using("btree", table.slug.asc().nullsLast().op("varchar_pattern_ops")),
 	index("events_event_venue_id_ffde28fd").using("btree", table.venueId.asc().nullsLast().op("int8_ops")),

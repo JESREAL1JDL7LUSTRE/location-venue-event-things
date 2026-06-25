@@ -22,6 +22,8 @@ import { TicketSpiceScraper } from './ticketspice.js';
 import { FacebookEventsScraper } from './facebook-events.js';
 import { EventsizeScraper } from './eventsize.js';
 import { GoogleMapsScraper } from './google-maps.js';
+import { FacebookPostsScraper } from './facebook-posts.js';
+import { InstagramPostsScraper } from './instagram-posts.js';
 
 export interface ScraperMeta {
   key: string;
@@ -97,6 +99,12 @@ export const SCRAPERS: Record<string, { new (): BaseScraper; meta: ScraperMeta }
   }),
   google_maps: Object.assign(GoogleMapsScraper, {
     meta: { key: 'google_maps', label: 'Google Maps', description: 'Venues in CDO via Google Maps Puppeteer scraper (2-phase)', usesPlaywright: false },
+  }),
+  facebook_posts: Object.assign(FacebookPostsScraper, {
+    meta: { key: 'facebook_posts', label: 'Facebook Posts', description: 'FB group/page posts → event extraction via Claude Haiku — requires active SearchQuery records', usesPlaywright: true, requiresProxy: true },
+  }),
+  instagram_posts: Object.assign(InstagramPostsScraper, {
+    meta: { key: 'instagram_posts', label: 'Instagram Posts', description: 'IG hashtag explore pages → event extraction via Claude Haiku — requires IG_COOKIES_FILE + active SearchQuery records', usesPlaywright: true },
   }),
 };
 
